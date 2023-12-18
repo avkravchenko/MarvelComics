@@ -1,6 +1,7 @@
 <template>
   <MyLoader v-if="isLoad" />
   <MyFilters />
+  <MyClear />
   <div class="comics-wrapper">
     <div
       v-if="comics && comics.length > 0"
@@ -28,6 +29,7 @@ import MyCard from "@/components/MyCard.vue";
 import MyPagination from "@/components/MyPagination.vue";
 import MyLoader from "@/components/MyLoader.vue";
 import MyFilters from "@/components/MyFilters.vue";
+import MyClear from "@/components/MyClear.vue";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
@@ -36,6 +38,7 @@ export default {
     MyPagination,
     MyLoader,
     MyFilters,
+    MyClear,
   },
   computed: {
     ...mapGetters("comicsModule", ["comics", "page", "filter", "isLoad"]),

@@ -49,7 +49,7 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin: 50px 0;
+  margin: 20px 0;
 
   .filters-header {
     line-height: 36px;
@@ -60,6 +60,7 @@ export default {
   .filters-wrapper {
     padding: 0;
     display: flex;
+    justify-content: center;
     list-style: none;
     gap: 10px;
     flex-wrap: wrap;

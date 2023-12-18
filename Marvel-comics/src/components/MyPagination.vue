@@ -31,9 +31,12 @@ export default {
   watch: {
     "$route.query.page"(newPage) {
       console.log(newPage);
-      if (newPage === "0") {
+      if (newPage === "0" || newPage === undefined) {
         this.currentPage = 1;
       }
+    },
+    "$route.query.search"(newSearch) {
+      if (newSearch) this.currentPage = 1;
     },
   },
 };
@@ -65,5 +68,34 @@ export default {
 }
 .active-page:hover {
   background-color: #2988c8;
+}
+@media screen and (max-width: 550px) {
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    column-gap: 10px;
+  }
+  .paginate-buttons {
+    height: 30px;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(242, 242, 242);
+    border: 1px solid rgb(217, 217, 217);
+    color: black;
+  }
+  .paginate-buttons:hover {
+    background-color: #d8d8d8;
+  }
+  .active-page {
+    background-color: #3498db;
+    border: 1px solid #3498db;
+    color: white;
+  }
+  .active-page:hover {
+    background-color: #2988c8;
+  }
 }
 </style>

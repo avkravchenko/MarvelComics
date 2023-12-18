@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logo">marvel</div>
-    <MySearch v-if="windowSize >= 550" />
+    <MySearch v-if="windowSize >= 551" />
     <MyModal v-if="isModal"><MySearch /></MyModal>
     <div @click="setModal" v-if="windowSize <= 550" class="search-icon">
       <svg
@@ -59,7 +59,12 @@ export default {
   align-items: center;
   padding: 20px;
 
+  .search-icon {
+    cursor: pointer;
+  }
+
   .logo {
+    cursor: default;
     font-weight: 800;
     font-size: 2rem;
     text-transform: uppercase;
