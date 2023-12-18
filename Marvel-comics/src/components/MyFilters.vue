@@ -52,6 +52,7 @@ export default {
   margin: 20px 0;
 
   .filters-header {
+    text-align: center;
     line-height: 36px;
     font-size: 2rem;
     font-weight: bold;
