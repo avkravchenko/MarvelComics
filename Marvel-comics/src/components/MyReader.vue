@@ -26,7 +26,7 @@ export default defineComponent({
   props: {
     allPages: {
       type: Number,
-      default: 0, // You can change the default value to suit your needs
+      default: 0,
     },
   },
   data() {

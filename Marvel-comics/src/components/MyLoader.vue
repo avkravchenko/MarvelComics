@@ -35,10 +35,10 @@ export default {};
     .dot {
       width: 55px;
       height: 55px;
-      border: solid 5px #e4e4e4; /* Simplify border property */
+      border: solid 5px #e4e4e4;
       border-top: solid 5px #5f5f5f;
       border-left: solid 5px #5f5f5f;
-      border-radius: 50%; /* Use 50% for a perfect circle */
+      border-radius: 50%;
       animation: rotate 2s linear infinite;
     }
 
