@@ -1,9 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="nav">
-      <span v-if="currentPage !== 0" @click="prev">◀️</span>
+      <span class="left" v-if="currentPage !== 0" @click="prev">◀️</span>
       <div class="pages">{{ currentPage }}/{{ allPages }}</div>
-      <span v-if="currentPage !== allPages" @click="next">▶️</span>
+      <span class="right" v-if="currentPage !== allPages" @click="next"
+        >▶️</span
+      >
     </div>
     <div class="image-wrapper">
       <img
@@ -22,11 +24,14 @@ import loremPicsum from "@/api/loremPicsum";
 
 export default defineComponent({
   props: {
-    allPages: Number,
+    allPages: {
+      type: Number,
+      default: 0, // You can change the default value to suit your needs
+    },
   },
   data() {
     return {
-      currentPage: 0,
+      currentPage: 1,
       images: [] as { download_url: string }[],
       page: 1,
     };
@@ -40,12 +45,10 @@ export default defineComponent({
         const response = await loremPicsum.get(``, {
           params: {
             page: this.page,
-            limit: this.allPages,
+            limit: this.allPages + 1,
           },
         });
         this.images = [...this.images, ...response.data];
-
-        console.log(this.images[0]);
       } catch (error) {
         console.error(error);
       }
@@ -81,6 +84,11 @@ export default defineComponent({
     align-items: center;
     gap: 15px;
     margin: 0 auto;
+
+    .left,
+    .right {
+      cursor: pointer;
+    }
 
     .pages {
       background-color: rgb(6, 190, 80);

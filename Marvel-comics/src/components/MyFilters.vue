@@ -7,7 +7,7 @@
       <router-link
         class="filter"
         :key="filter.id"
-        :to="{ path: '/', query: { format: filter.type, page: 0 } }"
+        :to="getUpdatedQuery(filter.type)"
         v-for="filter in comicsFilters"
       >
         <li>
@@ -30,6 +30,14 @@ export default {
         { id: 5, type: "digest" },
       ],
     };
+  },
+  methods: {
+    getUpdatedQuery(format: string) {
+      const currentQuery = { ...this.$route.query };
+      currentQuery.format = format;
+      currentQuery.page = "0";
+      return { path: "/", query: currentQuery };
+    },
   },
 };
 </script>
@@ -61,7 +69,11 @@ export default {
       padding: 10px;
       border-radius: 5px;
       color: #fff;
-      font-size: 700;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(4, 156, 65);
+      }
     }
   }
 }

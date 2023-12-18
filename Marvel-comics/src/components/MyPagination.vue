@@ -1,49 +1,61 @@
 <template>
-  <div>
-    <ul class="pagination-wrapper">
-      <router-link
-        v-for="(item, index) in 5"
-        :key="index"
-        :to="getUpdatedQuery(index)"
-      >
-        <li :class="{ active: isActive(index) }">
-          {{ index + 1 }}
-        </li>
-      </router-link>
-    </ul>
-  </div>
+  <vue-awesome-paginate
+    :total-items="total ? total : 0"
+    :items-per-page="20"
+    :max-pages-shown="5"
+    v-model="currentPage"
+    :on-click="onClickHandler"
+  />
 </template>
 
 <script lang="ts">
+import { mapGetters } from "vuex";
+import "vue-awesome-paginate/dist/style.css";
+
 export default {
+  data() {
+    return {
+      currentPage: 1,
+    };
+  },
+  computed: {
+    ...mapGetters("comicsModule", ["comics", "total"]),
+  },
   methods: {
-    getUpdatedQuery(index: Number) {
+    onClickHandler() {
       const currentQuery = { ...this.$route.query };
-      currentQuery.page = index + "";
-      return { path: "/", query: currentQuery };
-    },
-    isActive(index: number): boolean {
-      return this.$route.query.page === index.toString();
+      currentQuery.page = this.currentPage - 1 + "";
+      this.$router.push({ query: currentQuery });
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.pagination-wrapper {
+<style>
+.pagination-container {
   display: flex;
-  list-style: none;
-  gap: 10px;
-  .active {
-    background-color: rgb(7, 177, 89);
-  }
-
-  li {
-    background-color: rgb(0, 132, 255);
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  justify-content: center;
+  width: 100%;
+  column-gap: 10px;
+}
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(217, 217, 217);
+  color: black;
+}
+.paginate-buttons:hover {
+  background-color: #d8d8d8;
+}
+.active-page {
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  color: white;
+}
+.active-page:hover {
+  background-color: #2988c8;
 }
 </style>

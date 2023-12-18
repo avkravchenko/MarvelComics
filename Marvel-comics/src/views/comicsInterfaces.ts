@@ -1,3 +1,30 @@
+export interface Comic {
+  id: number;
+  thumbnail: {
+    path: string;
+    format: string;
+  };
+  title: string;
+  description: string;
+  textObjects: [];
+  characters: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: ComicItem[];
+  };
+  format: string;
+  creators: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: ComicItem[];
+  };
+  images: [];
+  pageCount: number;
+  prices: [];
+}
+
 export interface TextObject {
   type: string;
   language: string;

@@ -2,83 +2,75 @@
   <MyLoader v-if="isLoad" />
   <MyFilters />
   <div class="comics-wrapper">
-    <div v-for="item in comics" :key="item.id">
-      <MyCard :id="item.id" :thumb="item.thumbnail.path" :title="item.title" />
+    <div
+      v-if="comics && comics.length > 0"
+      v-for="item in comics"
+      :key="item.id"
+    >
+      <MyCard
+        :description="item.description"
+        :id="item.id"
+        :thumb="item.thumbnail.path"
+        :title="item.title"
+        :text-objects="item.textObjects"
+      />
+    </div>
+    <div class="nothing" v-else>
+      <p>Nothing was found 😭</p>
     </div>
     <MyPagination />
   </div>
 </template>
 
 <script lang="ts">
-import instance from "@/api/axiosInstance";
+import type { ComponentOptionsMixin } from "vue";
 import MyCard from "@/components/MyCard.vue";
 import MyPagination from "@/components/MyPagination.vue";
 import MyLoader from "@/components/MyLoader.vue";
-import { defineComponent } from "vue";
 import MyFilters from "@/components/MyFilters.vue";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
-interface Comic {
-  id: number;
-  thumbnail: {
-    path: string;
-    format: string;
-  };
-  title: string;
-}
-
-export default defineComponent({
+export default {
   components: {
     MyCard,
     MyPagination,
     MyLoader,
     MyFilters,
   },
-  data() {
-    return {
-      comics: null as Comic[] | null,
-      page: this.$route.query.page,
-      filter: this.$route.query.format,
-      isLoad: false,
-    };
-  },
-  mounted() {
-    this.getData();
-  },
-  watch: {
-    "$route.query.page"(newVal, oldVal) {
-      this.page = newVal;
-      this.getData();
-    },
-    "$route.query.format"(newVal, oldVal) {
-      this.filter = newVal;
-      this.getData();
-    },
+  computed: {
+    ...mapGetters("comicsModule", ["comics", "page", "filter", "isLoad"]),
   },
   methods: {
-    async getData() {
-      console.log(11111111);
-      this.isLoad = true;
-      try {
-        const response = await instance.get("/comics", {
-          params: {
-            offset: Number(this.page) * 20,
-            limit: 20,
-            noVariants: true,
-            format: this.filter,
-          },
-        });
-        console.log(response.data);
-        this.isLoad = false;
+    ...mapActions("comicsModule", ["fetchData"]),
+    ...mapMutations("comicsModule", [
+      "setPage",
+      "setFilter",
+      "setIsLoad",
+      "setSearch",
+    ]),
 
-        this.comics = response.data.data.results;
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.isLoad = false;
-      }
+    getData() {
+      this.setIsLoad(true);
+      this.fetchData();
     },
   },
-});
+  watch: {
+    "$route.query.page"(newPage) {
+      this.setPage(newPage);
+      this.getData();
+    },
+    "$route.query.format"(newFilter) {
+      this.setFilter(newFilter);
+      this.getData();
+    },
+  },
+  mounted() {
+    this.setSearch(this.$route.query.search);
+    this.setPage(this.$route.query.page);
+    this.setFilter(this.$route.query.format);
+    this.getData();
+  },
+} as ComponentOptionsMixin;
 </script>
 
 <style lang="scss" scoped>
@@ -91,5 +83,11 @@ a {
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
+
+  .nothing {
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+  }
 }
 </style>
