@@ -5,8 +5,8 @@ import type { StoreOptions } from "vuex";
 import type { RootState } from "./types";
 import { comicsModule } from "./comicsModule";
 import { particularComicsModule } from "./particularComicsModule";
-import { mutations } from "@/store/mutations";
-import { getters } from "@/store/getters";
+import { mutations } from "../store/mutations";
+import { getters } from "../store/getters";
 
 const state: RootState = {
   isModal: false,

@@ -5,9 +5,17 @@
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   }
 }
+
+// "paths": {
+//   "@app/*": ["./app/*"],
+//   "@assets/*": ["./assets/*"],
+//   "@components/*": ["./components/*"],
+//   "@styles/*": ["./styles/*"],
+//   "@utils/*": ["./utils/*"]
+// }

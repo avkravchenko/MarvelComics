@@ -1,9 +1,9 @@
 import type { Module } from "vuex";
 import type { ParticularComicTypes } from "./type";
 import type { RootState } from "../types";
-import { getters } from "@/store/particularComicsModule/getters";
-import { mutations } from "@/store/particularComicsModule/mutations";
-import { actions } from "@/store/particularComicsModule/actions";
+import { getters } from "../../store/particularComicsModule/getters";
+import { mutations } from "../../store/particularComicsModule/mutations";
+import { actions } from "../../store/particularComicsModule/actions";
 const state: ParticularComicTypes = {
   comicsData: null,
 };

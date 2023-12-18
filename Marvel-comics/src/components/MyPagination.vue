@@ -28,6 +28,14 @@ export default {
       this.$router.push({ query: currentQuery });
     },
   },
+  watch: {
+    "$route.query.page"(newPage) {
+      console.log(newPage);
+      if (newPage === "0") {
+        this.currentPage = 1;
+      }
+    },
+  },
 };
 </script>
 

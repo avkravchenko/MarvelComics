@@ -1,4 +1,4 @@
-import type { ComicsData } from "@/views/comicsInterfaces";
+import type { ComicsData } from "../../views/comicsInterfaces";
 
 export interface ParticularComicTypes {
   comicsData: ComicsData | null;

@@ -4,7 +4,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "types": ["webpack-env", "node", "vue-awesome-paginate"],
+    "types": ["webpack-env", "node", "vue-awesome-paginate", "vite/client"],
     "strict": true
   },
   "references": [

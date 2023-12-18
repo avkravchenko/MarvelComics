@@ -1,6 +1,6 @@
 import type { MutationTree } from "vuex";
-import type { ComicsState } from "@/store/comicsModule/types";
-import type { Comic } from "@/views/comicsInterfaces";
+import type { ComicsState } from "../../store/comicsModule/types";
+import type { Comic } from "../../views/comicsInterfaces";
 
 export const mutations: MutationTree<ComicsState> = {
   setComics(state: ComicsState, payload: Comic[]): void {

@@ -1,7 +1,7 @@
 import type { ActionTree } from "vuex";
 import type { ParticularComicTypes } from "./type";
 import type { RootState } from "../types";
-import instance from "@/api/axiosInstance";
+import instance from "../../api/axiosInstance";
 
 export const actions: ActionTree<ParticularComicTypes, RootState> = {
   async fetchComics({ commit }: any, id: string) {

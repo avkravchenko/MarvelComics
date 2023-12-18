@@ -52,7 +52,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
-// import { RootState } from "@/store"; // Adjust the import path
 import MyCarousel from "@/components/MyCarousel.vue";
 import MyReader from "@/components/MyReader.vue";
 import MyButton from "@/components/MyButton.vue";

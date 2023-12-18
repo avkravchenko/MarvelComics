@@ -1,7 +1,7 @@
 import type { ActionTree } from "vuex";
 import type { ComicsState } from "./types";
 import type { RootState } from "../types";
-import instance from "@/api/axiosInstance";
+import instance from "../../api/axiosInstance";
 import debounce from "lodash/debounce";
 
 export const actions: ActionTree<ComicsState, RootState> = {
